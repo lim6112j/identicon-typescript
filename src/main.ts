@@ -7,7 +7,8 @@ const md5 = new Md5();
 const tile_size = 50;
 const tiles_per_side = 6;
 const total_tiles = tiles_per_side * tiles_per_side;
-const hex_to_ints = (md5.appendStr("hello world").end() as string)
+const arg = process.argv[2];
+const hex_to_ints = (md5.appendStr(arg).end() as string)
   .split("")
   .map((x) => {
     switch (x) {
@@ -46,8 +47,9 @@ const canvas = createCanvas(tile_size * tiles_per_side, tile_size * tiles_per_si
 const context = canvas.getContext("2d");
 context.fillStyle = "white";
 context.fillRect(0, 0, canvas.width, canvas.height);
-int_to_bools.flatMap((y, i) => {
-  context.fillStyle = "green";
+int_to_bools.map((y, i) => {
+  const randomColor = `#${Math.floor(Math.random() * 16777215).toString(16)}`;
+  context.fillStyle = randomColor;
   if (y) {
     context.fillRect(...xyTuple(i), tile_size, tile_size)
     context.fillRect(...xyTupleMirror(i), tile_size, tile_size)
