@@ -55,7 +55,7 @@ int_to_bools.map((y, i) => {
     context.fillRect(...xyTupleMirror(i), tile_size, tile_size)
   }
 })
-const out = fs.createWriteStream(__dirname + '/../identicon.jpg')
+const out = fs.createWriteStream(__dirname + `/../${arg}.jpg`)
 const stream = canvas.createJPEGStream()
 stream.pipe(out);
 out.on("finish", () => console.log('the jpg file was created'))
